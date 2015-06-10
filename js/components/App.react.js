@@ -1,16 +1,28 @@
 import React from 'react';
-import { GoogleMaps } from "react-google-maps";
+import { GoogleMaps } from 'react-google-maps';
+import LocationStore from '../stores/LocationStore';
 
 class App extends React.Component {
     constructor(props) {
         super(props);
 
+        this._onChange = this._onChange.bind(this);
+
+        const position = LocationStore.getState().position;
         this.state = {
             position: {
-                lat: 51.490839799999996,
-                lng: -0.29986670000000004,
+                lat: position.lat,
+                lng: position.lng,
             }
         }
+    }
+
+    componentDidMount() {
+        LocationStore.listen(this._onChange);
+    }
+
+    componentWillUnmount() {
+        LocationStore.unlisten(this._onChange);
     }
 
     render() {
@@ -21,11 +33,11 @@ class App extends React.Component {
         return (
             <GoogleMaps containerProps={{
                     style: {
-                        height: "1000px",
-                        width: "1000px"
+                        height: '1000px',
+                        width: '1000px'
                     },
                 }}
-                ref="map"
+                ref='map'
                 googleMapsApi={google.maps}
                 zoom={15}
                 center={{lat: position.lat, lng: position.lng}}
@@ -39,6 +51,19 @@ class App extends React.Component {
         if (!center.equals(this.state.center)) {
             //console.log(center);
         }
+    }
+
+    _onChange() {
+        const position = LocationStore.getState().position;
+
+        console.log(position);
+
+        this.setState({
+            position: {
+                lat: position.lat,
+                lng: position.lng
+            }
+        });
     }
 }
 
