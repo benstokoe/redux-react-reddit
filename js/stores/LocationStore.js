@@ -13,7 +13,6 @@ class LocationStore {
 
     onUpdateLocation(position) {
         const coords = position.coords;
-        console.log(coords);
 
         this.position = {
             lat: coords.latitude,
