@@ -1,24 +1,9 @@
-import mongoose from 'mongoose';
+var mongoose = require('mongoose');
 
-const schema = new mongoose.Schema({
+var schema = new mongoose.Schema({
     id       : String,
     language : String,
-    rating   : Integer
+    rating   : Number
 });
 
-schema.statics.getVenue = function(venueId, language, callback) {
-
-    console.log('hey');
-
-    //Venue.find({}, 'rating').exec(function(err, doc) {
-        
-        //if (!err) {
-            //venue = doc;
-        //}
-
-        //callback(venue);
-    //});
-
-};
-
-export default Venue = mongoose.model('Venue', schema);
+module.exports = Venue = mongoose.model('Venue', schema);

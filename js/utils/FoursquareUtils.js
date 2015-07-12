@@ -1,5 +1,5 @@
 import request from 'superagent';
-import VenueActions from '../actions/VenueActions';
+import FoursquareActions from '../actions/FoursquareActions';
 
 const FoursquareUtils = {
     url: 'https://api.foursquare.com/v2/venues/explore',
@@ -17,7 +17,7 @@ const FoursquareUtils = {
                 venuePhotos: 1
             })
             .end(function(err, res) {
-                VenueActions.updateVenues(res.body.response.groups[0].items);
+                FoursquareActions.updateVenues(res.body.response.groups[0].items);
             });
     }
 

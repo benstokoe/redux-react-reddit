@@ -1,6 +1,6 @@
 import alt from '../alt';
 
-class VenueActions {
+class FoursquareActions {
     constructor() {
         this.generateActions(
             'updateVenues'
@@ -8,4 +8,4 @@ class VenueActions {
     }
 }
 
-export default alt.createActions(VenueActions);
+export default alt.createActions(FoursquareActions);

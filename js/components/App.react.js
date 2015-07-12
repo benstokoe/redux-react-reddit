@@ -2,7 +2,7 @@ import React from 'react';
 import { GoogleMaps, Marker } from 'react-google-maps';
 import FoursquareUtils from '../utils/FoursquareUtils';
 import LocationStore from '../stores/LocationStore';
-import VenueStore from '../stores/VenueStore';
+import FoursquareStore from '../stores/FoursquareStore';
 import VenueSidebar from './VenueSidebar.react';
 
 class App extends React.Component {
@@ -17,20 +17,20 @@ class App extends React.Component {
                 lat: position.lat,
                 lng: position.lng,
             },
-            venues: VenueStore.getState().venues 
+            venues: FoursquareStore.getState().venues 
         }
     }
 
     componentDidMount() {
         LocationStore.listen(this._onChange);
-        VenueStore.listen(this._onChange);
+        FoursquareStore.listen(this._onChange);
 
         FoursquareUtils.getVenues(0,0);
     }
 
     componentWillUnmount() {
         LocationStore.unlisten(this._onChange);
-        VenueStore.unlisten(this._onChange);
+        FoursquareStore.unlisten(this._onChange);
     }
 
     render() {
@@ -84,7 +84,7 @@ class App extends React.Component {
                 lat: position.lat,
                 lng: position.lng
             },
-            venues: VenueStore.getState().venues
+            venues: FoursquareStore.getState().venues
         });
     }
 }
