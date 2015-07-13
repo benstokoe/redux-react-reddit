@@ -5,27 +5,40 @@ var mongoose = require('mongoose');
 var express = require('express');
 var app = express();
 
+var Venue = require('./server/models/Venue.js');
+
 new WebpackDevServer(webpack(config), {
-    publicPath: config.output.publicPath,
-    hot: true,
-    historyApiFallback: true
+  publicPath: config.output.publicPath,
+  hot: true,
+  historyApiFallback: true
 }).listen(3000, 'localhost', function (err, result) {
-    if (err) {
-        console.log(err);
-    }
-
-    mongoose.connect('mongodb://localhost/do-they-speak-english');
-
-    console.log('Listening at localhost:3000');
+  if (err) {
+    console.log(err);
+  }
+  console.log('Listening at localhost:3000');
 });
 
-app.get('/api/hello', function(req, res) {
-    res.send('hello');
+app.use(function(req, res, next) {
+  res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
+
+  next();
+});
+
+app.get('/api/venues', function(req, res) {
+  Venue.find(function(err, venues) {
+    if (err)
+      res.send(err);
+
+    res.json(venues);
+  });
 });
 
 var server = app.listen(3001, function () {
-    var host = server.address().address;
-    var port = server.address().port;
 
-    console.log('Example app listening at http://%s:%s', host, port);
+  mongoose.connect('mongodb://localhost/do-they-speak-english');
+
+  var host = server.address().address;
+  var port = server.address().port;
+
+  console.log('Example app listening at http://%s:%s', host, port);
 });
