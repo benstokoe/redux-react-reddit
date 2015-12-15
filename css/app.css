@@ -3,21 +3,7 @@ body {
   color: #333;
 }
 
-h1 {
-  font-size: 20px;
-}
-
-#venue-sidebar {
+.subreddit {
   float: left;
-  width: 200px;
-}
-
-#venue-map {
-  float: left;
-  position: absolute;
-  height: auto;
-  bottom: 0;
-  left: 220px;
-  right: 0;
-  top: 0;
+  margin-right: 10px;
 }

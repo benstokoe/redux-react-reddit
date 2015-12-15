@@ -1,11 +1,13 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { fetchSubreddits } from '../actions/redditActions';
+import { fetchSubreddits, updateSubreddit } from '../actions/redditActions';
 
 import Subreddits from '../components/Subreddits.react';
 
 @connect(state => {
-  return { subreddits: state.subreddits };
+  return {
+    subreddits: state.subreddits
+  };
 })
 class App extends Component {
   static propTypes = {
@@ -13,9 +15,20 @@ class App extends Component {
     subreddits: PropTypes.object
   }
 
+  constructor(props) {
+    super(props);
+
+    this.handleSubredditClick = this.handleSubredditClick.bind(this);
+  }
+
   componentDidMount() {
     const { dispatch } = this.props;
     dispatch(fetchSubreddits());
+  }
+
+  handleSubredditClick(subreddit) {
+    const { dispatch } = this.props;
+    dispatch(updateSubreddit(subreddit));
   }
 
   render() {
@@ -25,11 +38,14 @@ class App extends Component {
       return <p>Loading</p>;
     }
 
+    const { currentSubreddit } = this.props.subreddits;
+    console.log(currentSubreddit);
+
     return (
       <section id="reddit">
         <h1>Reddit</h1>
 
-        <Subreddits subreddits={ subreddits } />
+        <Subreddits subreddits={ subreddits } onSubredditClick={ this.handleSubredditClick } />
       </section>
     );
   }
