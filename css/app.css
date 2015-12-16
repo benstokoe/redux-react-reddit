@@ -7,3 +7,8 @@ body {
   float: left;
   margin-right: 10px;
 }
+
+#posts {
+  clear: both;
+  margin-top: 100px;
+}
