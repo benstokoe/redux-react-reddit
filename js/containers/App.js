@@ -42,10 +42,6 @@ class App extends Component {
     const { children: subreddits } = this.props.subreddits;
     const { children: posts } = this.props.posts;
 
-    if (!subreddits) {
-      return <p>Loading</p>;
-    }
-
     // const { currentSubreddit } = this.props.subreddits;
 
     return (
