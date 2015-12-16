@@ -8,7 +8,6 @@ class Subreddit extends Component {
 
   constructor() {
     super();
-
     this.handleSubredditClick = this.handleSubredditClick.bind(this);
   }
 

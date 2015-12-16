@@ -13,8 +13,18 @@ const subreddits = (state = {
   }
 };
 
+const posts = (state = {}, action) => {
+  switch (action.type) {
+  case 'LOADED_POSTS':
+    return Object.assign({}, state, action.posts.data);
+  default:
+    return state;
+  }
+};
+
 const rootReducer = combineReducers({
-  subreddits
+  subreddits,
+  posts
 });
 
 export default rootReducer;

@@ -2,7 +2,7 @@ import React from 'react';
 import Subreddit from './Subreddit.react';
 
 const Subreddits = ({ subreddits, onSubredditClick }) => (
-  <section key="hi" id="subreddits">
+  <section id="subreddits">
     <h2>Subreddits</h2>
 
     {
